@@ -3,7 +3,7 @@
 $db = \ElLlano\Api\models\Connection::getConnection();
 
 Flight::route('GET /api/get/almacen', function() use($db) {
-    $query = "CALL get_almacenes();";
+    $query = "CALL get_all_almacenes()";
     try {
         $stm = $db->prepare($query);
         $isGood = $stm->execute();

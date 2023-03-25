@@ -9,10 +9,10 @@ Flight::route('GET /api/get/productos', function() use($db) {
         $isGood = $stm->execute();
         if ($isGood){
             $result = $stm->fetchAll(PDO::FETCH_ASSOC);
-            Flight::json(['result' => $result]);
+            Flight::json(["result" => $result]);
         }
-    } catch (PDOException|Exception $e){
-        Flight::json(['message' => 'Se ha producido un error en el servidor'], 500);
+    }catch (PDOException|Exception $e){
+        Flight::json(['message' => 'Se ha producido un error en el servidor', 'error' => $e->getMessage()], 500);
     }
 });
 
