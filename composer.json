@@ -1,0 +1,14 @@
+{
+    "name": "el-llano/api",
+    "autoload": {
+        "psr-4": {
+            "ElLlano\\Api\\": "./"
+        }
+    },
+    "require": {
+        "illuminate/database": "^10.4",
+        "mikecao/flight": "^2.0",
+        "vlucas/phpdotenv": "^5.5",
+        "ext-pdo": "*"
+    }
+}
