@@ -21,4 +21,15 @@ Flight::route('GET /test/db', function() use($db) {
     }
 });
 
+Flight::route('GET|POST /test/get/ip', function () {
+
+// Obtener la dirección IP del cliente
+    $ip_cliente = Flight::request()->ip;
+
+// Imprimir la dirección IP del cliente
+    Flight::json(["La dirección IP del cliente es: "=>$ip_cliente]);
+
+
+});
+
 $db = null;

@@ -34,4 +34,13 @@ Flight::route('POST /api/validar', function() use($db) {
     }
 });
 
+Flight::route('POST /api/create/user', function () use($db){
+    $data = Flight::request()->data->getData();
+    try{
+        $stm = $db->prepare('CALL ');
+    } catch (PDOException|Exception $e){
+        Flight::json(['message' => 'Se ha producido un error en el servidor'], 500);
+    }
+});
+
 $db = null;
