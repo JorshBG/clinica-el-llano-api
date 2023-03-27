@@ -24,7 +24,7 @@ Flight::route('GET /api/get/productos', function() use($db) {
         $stm = $db->prepare($query);
         $isGood = $stm->execute();
         if ($isGood){
-            $result = $stm->fetchAll(PDO::FETCH_ASSOC);
+            $result = $stm->fetchAll();
             Flight::json(["result" => $result]);
         }
     }catch (PDOException|Exception $e){
