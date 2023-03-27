@@ -1,6 +1,8 @@
 <?php
 
 $db = \ElLlano\Api\models\Connection::getConnection();
+$isAjax = Flight::request()->ajax;
+$header = getallheaders();
 
 Flight::route('GET /api/greeting', function (){
     Flight::json(["message"=>"Hola buenas tardes"]);
@@ -13,6 +15,8 @@ Flight::route('GET /', function (){
 
 Flight::route('POST /api/validar', function() use($db) {
     $query = "CALL validar_usuario(:email);";
+    $data = Flight::request()->data->getData();
+
     $excluir = "password";
     try {
         $stm = $db->prepare($query);
@@ -37,7 +41,16 @@ Flight::route('POST /api/validar', function() use($db) {
 Flight::route('POST /api/create/user', function () use($db){
     $data = Flight::request()->data->getData();
     try{
-        $stm = $db->prepare('CALL ');
+        $stm = $db->prepare('CALL set_registrar_usuario(:name,:password,:role,:email)');
+        $flag = $stm->execute([
+            "name"=>$data['nombre'],
+            "password"=>$data['password'],
+            "role"=>$data['role'],
+            "email"=>$data['email']
+        ]);
+        if ($flag){
+            Flight::json(['message'=>'Se han realizado la inserción','isValid'=>true], 201);
+        }
     } catch (PDOException|Exception $e){
         Flight::json(['message' => 'Se ha producido un error en el servidor'], 500);
     }
