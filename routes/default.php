@@ -49,15 +49,15 @@ Flight::route('POST /api/validar', function() use($ip, $db, $data) {
     }
 });
 
-Flight::route('POST /api/create/user', function () use($db){
+Flight::route('POST /api/crear/usuario', function () use($db){
     $data = Flight::request()->data->getData();
     try{
         $stm = $db->prepare('CALL set_registrar_usuario(:name,:password,:role,:email)');
         $flag = $stm->execute([
             "name"=>$data['nombre'],
-            "password"=>$data['password'],
-            "role"=>$data['role'],
-            "email"=>$data['email']
+            "password"=>md5($data['password']),
+            "role"=>$data['rol'],
+            "email"=>$data['correo']
         ]);
         if ($flag){
             Flight::json(['message'=>'Se han realizado la inserción','isValid'=>true], 201);

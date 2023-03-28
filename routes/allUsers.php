@@ -1,16 +1,34 @@
 <?php
 
-$db = \ElLlano\Api\models\Connection::getConnection();
+use ElLlano\Api\middleware\Verify;
+use ElLlano\Api\models\Connection;
 
+$db = Connection::getConnection();
+$token = (getallheaders())['x-api-key']??false;
+$id_usuario = Flight::request()->query['idUsuario']??false;
+$body = Flight::request()->data->getData();
+
+// region Para obtener información
 // Obtener los datos de todos los alamacenes
-Flight::route('GET /api/get/almacen', function() use($db) {
+Flight::route('GET /api/get/almacen', function() use($id_usuario, $token, $db) {
     $query = "CALL get_all_almacenes()";
     try {
-        $stm = $db->prepare($query);
-        $isGood = $stm->execute();
-        if ($isGood){
-            $result = $stm->fetchAll(PDO::FETCH_ASSOC);
-            Flight::json(['result' => $result]);
+        if ($token)
+        {
+            $flag = Verify::token(array('idUsuario'=>$id_usuario,'token'=>$token));
+            if ($flag)
+            {
+                $stm = $db->prepare($query);
+                $isGood = $stm->execute();
+                if ($isGood){
+                    $result = $stm->fetchAll();
+                    Flight::json(['result' => $result]);
+                }
+            } else {
+                Flight::json(['message'=>'Sin autorización'], 401);
+            }
+        }else {
+            Flight::json(['message'=>'No se ha provisto un token'], 403);
         }
     } catch (PDOException|Exception $e){
         Flight::json(['message' => 'Se ha producido un error en el servidor'], 500);
@@ -18,65 +36,101 @@ Flight::route('GET /api/get/almacen', function() use($db) {
 });
 
 // Obtener los datos de todos los productos
-Flight::route('GET /api/get/productos', function() use($db) {
+Flight::route('GET /api/get/productos', function() use($id_usuario, $token, $db) {
     $query = "CALL get_all_products()";
     try {
-        $stm = $db->prepare($query);
-        $isGood = $stm->execute();
-        if ($isGood){
-            $result = $stm->fetchAll();
-            Flight::json(["result" => $result]);
+        if ($token)
+        {
+            $flag = Verify::token(array('idUsuario'=>$id_usuario,'token'=>$token));
+            if ($flag)
+            {
+                $stm = $db->prepare($query);
+                $isGood = $stm->execute();
+                if ($isGood){
+                    $result = $stm->fetchAll();
+                    Flight::json(["result" => $result]);
+                }
+            } else {
+                Flight::json(['message'=>'Sin autorización'], 401);
+            }
+        }else {
+            Flight::json(['message'=>'No se ha provisto un token'], 403);
+        }
+    } catch (PDOException|Exception $e){
+        Flight::json(['message' => 'Se ha producido un error en el servidor', 'error' => $e->getMessage()], 500);
+    }
+});
+// endregion
+
+// region Para crear nuevos recursos
+// Crear un nuevo producto
+Flight::route('POST /api/crear/producto', function () use($id_usuario, $body, $token, $db) {
+    $query = "CALL set_registrar_producto(:nombre,:unidad_de_compra,:unidad_de_venta,:categoria,:presentacion,:contenido,:descuento,:precio,:sustancia_activa,:descripcion,:ubicacion,:costo_por_unidad,:codigo_de_barras)";
+    try {
+
+        if ($token)
+        {
+            $flag = Verify::token(array('idUsuario'=>$id_usuario,'token'=>$token));
+            if ($flag)
+            {
+                $stm = $db->prepare($query);
+                $isGood = $stm->execute([
+                    "nombre" => $body["nombre"],
+                    "unidad_de_compra"=>$body["unidad_de_compra"],
+                    "unidad_de_venta"=>$body["unidad_de_venta"],
+                    "categoria"=>$body['categoria'],
+                    "presentacion"=>$body['presentacion'],
+                    "contenido"=>$body['contenido'],
+                    "descuento"=>$body['descuento'],
+                    "precio"=>$body['precio'],
+                    "sustancia_activa"=>$body['sustancia_activa'],
+                    "descripcion"=>$body['descripcion'],
+                    "ubicacion"=>$body['ubicacion'],
+                    "costo_por_unidad"=>$body['costo_por_unidad'],
+                    "codigo_de_barras"=>$body['codigo_de_barras']
+                ]);
+                Flight::json(["isGood" => $isGood], 201);
+            } else {
+                Flight::json(['message'=>'Sin autorización'], 401);
+            }
+        }else {
+            Flight::json(['message'=>'No se ha provisto un token'], 403);
         }
     }catch (PDOException|Exception $e){
         Flight::json(['message' => 'Se ha producido un error en el servidor', 'error' => $e->getMessage()], 500);
     }
 });
 
-// Crear un nuevo producto
-Flight::route('POST /api/crear/producto', function () use($db) {
-    $query = "CALL set_registrar_producto(:nombre,:unidad_de_compra,:unidad_de_venta,:categoria,:presentacion,:contenido,:descuento,:precio,:sustancia_activa,:descripcion,:ubicacion,:costo_por_unidad,:codigo_de_barras)";
-    $data = Flight::request()->data->getData();
-    try {
-        $stm = $db->prepare($query);
-        $isGood = $stm->execute([
-            "nombre" => $data["nombre"],
-            "unidad_de_compra"=>$data["unidad_de_compra"],
-            "unidad_de_venta"=>$data["unidad_de_venta"],
-            "categoria"=>$data['categoria'],
-            "presentacion"=>$data['presentacion'],
-            "contenido"=>$data['contenido'],
-            "descuento"=>$data['descuento'],
-            "precio"=>$data['precio'],
-            "sustancia_activa"=>$data['sustancia_activa'],
-            "descripcion"=>$data['descripcion'],
-            "ubicacion"=>$data['ubicacion'],
-            "costo_por_unidad"=>$data['costo_por_unidad'],
-            "codigo_de_barras"=>$data['codigo_de_barras']
-        ]);
-        Flight::json(["isGood" => $isGood], 201);
-    }catch (PDOException|Exception $e){
-        Flight::json(['message' => 'Se ha producido un error en el servidor', 'error' => $e->getMessage()], 500);
-    }
-});
-
 // Crear un nuevo traslado
-Flight::route('POST /api/abrir/traslado', function () use($db) {
+Flight::route('POST /api/abrir/traslado', function () use($id_usuario, $body, $token, $db) {
     $query = "CALL op_abrir_traslado(:idProducto,:idAlmacenOrigen,:idAlmacenDestino,:cantidad,:idUsuario)";
-    $data = Flight::request()->data->getData();
     try {
-        $stm = $db->prepare($query);
-        $isGood = $stm->execute([
-            "idProducto"=>$data['idProducto'],
-            "idAlmacenOrigen"=>$data['idAlmacenOrigen'],
-            "idAlmacenDestino"=>$data['idAlmacenDestino'],
-            "cantidad"=>$data['cantidad'],
-            "idUsuario"=>$data['idUsuario']
-        ]);
-        Flight::json(["isGood" => $isGood]);
+        if ($token && $id_usuario)
+        {
+            $flag = Verify::token(array('idUsuario'=>$id_usuario,'token'=>$token));
+            if ($flag)
+            {
+                $stm = $db->prepare($query);
+                $isGood = $stm->execute([
+                    "idProducto"=>$body['idProducto'],
+                    "idAlmacenOrigen"=>$body['idAlmacenOrigen'],
+                    "idAlmacenDestino"=>$body['idAlmacenDestino'],
+                    "cantidad"=>$body['cantidad'],
+                    "idUsuario"=>$body['idUsuario']
+                ]);
+                Flight::json(["isGood" => $isGood]);
+            } else {
+                Flight::json(['message'=>'Sin autorización'], 401);
+            }
+        }else {
+            Flight::json(['message'=>'No se ha provisto un token'], 403);
+        }
+
     }catch (PDOException|Exception $e){
         Flight::json(['message' => 'Se ha producido un error en el servidor', 'error' => $e->getMessage()], 500);
     }
 });
+// endregion
 
 // Cerrar un traslado
 $db = null;

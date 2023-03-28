@@ -2,33 +2,25 @@
 
 namespace ElLlano\Api\middleware;
 
-use PDO;
 use PDOException;
-
+use ElLlano\Api\models\Connection;
 class Verify
 {
-
-    private PDO $db;
-
-    /**
-     * @param PDO $db
-     */
-    public function __construct(PDO $db)
-    {
-        $this->db = $db;
-    }
-
 
     /**
      * @throws PDOException
      */
-    public function token($content):bool
+    public static function token($content):bool
     {
-        $stm = $this->db->prepare('CALL get_token_usuario(:idUsuario)');
+        $db = Connection::getConnection();
+
+        $stm = $db->prepare('CALL get_token_usuario(:idUsuario)');
         $flag = $stm->execute(['idUsuario'=>$content['idUsuario']]);
         if ($flag)
         {
             $token = ($stm->fetch())['token'];
+            $stm->closeCursor();
+            $db=null;
             if ($token)
             {
                 if ($token === $content['token'])
