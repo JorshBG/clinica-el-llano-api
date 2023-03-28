@@ -1,5 +1,10 @@
 <?php
-$db = \ElLlano\Api\models\Connection::getConnection();
+
+use ElLlano\Api\middleware\Role;
+use ElLlano\Api\models\Connection;
+
+$db = Connection::getConnection();
+$id_usuario = Flight::request()->query['idUsuario']??false;
 
 Flight::route('/test1', function (){
     Flight::json(['message'=>'Este es el test 1']);
@@ -29,6 +34,16 @@ Flight::route('GET|POST /test/get/ip', function () {
 // Imprimir la dirección IP del cliente
     Flight::json(["La dirección IP del cliente es: "=>$ip_cliente]);
 
+
+});
+
+Flight::route('GET /api/variables', function () use ($id_usuario) {
+
+    $role_required = "ADMINISTRADOR";
+
+    $validation = Role::validate($id_usuario, $role_required);
+
+    Flight::json(['isValid'=>$validation]);
 
 });
 
