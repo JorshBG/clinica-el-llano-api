@@ -1,13 +1,16 @@
 <?php
 
-$db = \ElLlano\Api\models\Connection::getConnection();
+$db = Connection::getConnection();
 $isAjax = Flight::request()->ajax;
 $ip = Flight::request()->ip;
 $header = getallheaders();
 $data = Flight::request()->data->getData();
 
 use ElLlano\Api\controllers\Token;
+use ElLlano\Api\models\Connection;
 
+
+// region Saludos de la api
 Flight::route('GET /api/greeting', function (){
     Flight::json(["message"=>"Hola buenas tardes"]);
 });
@@ -15,8 +18,9 @@ Flight::route('GET /api/greeting', function (){
 Flight::route('GET /', function (){
     Flight::json(["message"=>"Hola buenas tardes"]);
 });
+// endregion
 
-
+// region Validar el usuario y retornar el token
 Flight::route('POST /api/validar', function() use($ip, $db, $data) {
     $query = "CALL validar_usuario(:email);";
     $excluir = "password";
@@ -48,7 +52,9 @@ Flight::route('POST /api/validar', function() use($ip, $db, $data) {
         Flight::json(['message' => 'Se ha producido un error en el servidor', 'error'=>$e->getMessage()], 500);
     }
 });
+// endregion
 
+// region Crear un nuevo usuario
 Flight::route('POST /api/crear/usuario', function () use($db){
     $data = Flight::request()->data->getData();
     try{
@@ -66,5 +72,6 @@ Flight::route('POST /api/crear/usuario', function () use($db){
         Flight::json(['message' => 'Se ha producido un error en el servidor'], 500);
     }
 });
+// endregion
 
 $db = null;
