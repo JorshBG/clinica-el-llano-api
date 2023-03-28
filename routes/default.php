@@ -1,13 +1,15 @@
 <?php
 
+use ElLlano\Api\controllers\Token;
+use ElLlano\Api\models\Connection;
+
 $db = Connection::getConnection();
 $isAjax = Flight::request()->ajax;
 $ip = Flight::request()->ip;
 $header = getallheaders();
 $data = Flight::request()->data->getData();
 
-use ElLlano\Api\controllers\Token;
-use ElLlano\Api\models\Connection;
+
 
 
 // region Saludos de la api
