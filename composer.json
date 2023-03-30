@@ -10,6 +10,7 @@
         "mikecao/flight": "^2.0",
         "vlucas/phpdotenv": "^5.5",
         "ext-pdo": "*",
-      "ext-openssl": "*"
+      "ext-openssl": "*",
+        "fruitcake/php-cors": "^1.2"
     }
 }

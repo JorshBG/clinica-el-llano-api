@@ -13,7 +13,7 @@ Flight::route('/test1', function (){
 
 
 Flight::route('GET /test/db', function() use($db) {
-    $query = "CALL get_almacenes();";
+    $query = "CALL get_all_almacenes();";
     try {
         $stm = $db->prepare($query);
         $isGood = $stm->execute();
@@ -28,14 +28,20 @@ Flight::route('GET /test/db', function() use($db) {
 
 Flight::route('GET|POST /test/get/ip', function () {
 
-// Obtener la dirección IP del cliente
+    // Obtener la dirección IP del cliente
     $ip_cliente = Flight::request()->ip;
+    $params = Flight::request()->query;
+    $data = Flight::request()->data->getData();
 
-// Imprimir la dirección IP del cliente
-    Flight::json(["La dirección IP del cliente es: "=>$ip_cliente]);
+
+
+
+    // Imprimir la dirección IP del cliente
+    Flight::json(["La dirección IP del cliente es: "=>$ip_cliente,'data'=>$data]);
 
 
 });
+
 
 Flight::route('GET /api/variables', function () use ($id_usuario) {
 

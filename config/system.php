@@ -1,2 +1,2 @@
 <?php
-define('ROOT', __DIR__ . '/../');
+const ROOT = __DIR__ . '/../';

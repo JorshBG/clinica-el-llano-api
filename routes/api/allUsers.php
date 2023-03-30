@@ -2,11 +2,17 @@
 
 use ElLlano\Api\middleware\Verify;
 use ElLlano\Api\models\Connection;
+use Fruitcake\Cors\CorsService;
 
 $db = Connection::getConnection();
 $token = (getallheaders())['x-api-key']??false;
 $id_usuario = Flight::request()->query['idUsuario']??false;
 $body = Flight::request()->data->getData();
+
+
+
+
+
 
 // region Para obtener información
 // Obtener los datos de todos los alamacenes
@@ -60,6 +66,7 @@ Flight::route('GET /api/get/productos', function() use($id_usuario, $token, $db)
         Flight::json(['message' => 'Se ha producido un error en el servidor', 'error' => $e->getMessage()], 500);
     }
 });
+
 // endregion
 
 // region Para crear nuevos recursos
