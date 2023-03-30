@@ -4,7 +4,6 @@ use ElLlano\Api\middleware\Role;
 use ElLlano\Api\middleware\Verify;
 use ElLlano\Api\models\Connection;
 
-$db = Connection::getConnection();
 $isAjax = Flight::request()->ajax;
 $ip = Flight::request()->ip;
 $token = (getallheaders())['x-api-key']??false;
@@ -53,8 +52,10 @@ function constraint($token, $id_usuario, $rol_required, $callback): void
 }
 
 
-Flight::route('PUT /api/actualizar/producto', function () use ($rol_required, $ip, $body, $db, $id_usuario, $token) {
-    $execution = function () use ($db, $body, $ip){
+Flight::route('PUT /api/actualizar/producto', function () use ($rol_required, $ip, $body, $id_usuario, $token) {
+    
+    $execution = function () use ($body, $ip){
+        $db = Connection::getConnection();
         $query = "CALL up_actualizar_producto(:nombre,:unidad_de_compra,:unidad_de_venta,:categoria,:presentacion,:contenido,:descuento,:precio,:sustancia_activa,:descripcion,:ubicacion,:costo_por_unidad,:codigo_de_barras,:ipv4,:idProducto)";
         $stm = $db->prepare($query);
         $wasGood = $stm->execute([
@@ -80,10 +81,11 @@ Flight::route('PUT /api/actualizar/producto', function () use ($rol_required, $i
     constraint($token,$id_usuario, $rol_required, $execution);
 });
 
-Flight::route('DELETE /api/eliminar/producto', function () use ($rol_required, $ip, $body, $db, $id_usuario, $token)
+Flight::route('DELETE /api/eliminar/producto', function () use ($rol_required, $ip, $body, $id_usuario, $token)
 {
-    $execution = function () use ($ip, $body, $db)
+    $execution = function () use ($ip, $body)
     {
+        $db = Connection::getConnection();
         $query = "CALL up_eliminar_producto(:idProducto)";
         $stm = $db->prepare($query);
         $wasGood=$stm->execute(['idProducto'=>$body['id_producto']]);
@@ -91,6 +93,3 @@ Flight::route('DELETE /api/eliminar/producto', function () use ($rol_required, $
     };
     constraint($token, $id_usuario, $rol_required, $execution);
 });
-
-
-$db = null;

@@ -4,19 +4,13 @@ use ElLlano\Api\middleware\Verify;
 use ElLlano\Api\models\Connection;
 use Fruitcake\Cors\CorsService;
 
-$db = Connection::getConnection();
 $token = (getallheaders())['x-api-key']??false;
 $id_usuario = Flight::request()->query['idUsuario']??false;
 $body = Flight::request()->data->getData();
 
-
-
-
-
-
 // region Para obtener información
 // Obtener los datos de todos los alamacenes
-Flight::route('GET /api/get/almacen', function() use($id_usuario, $token, $db) {
+Flight::route('GET /api/get/almacen', function() use($id_usuario, $token) {
     $query = "CALL get_all_almacenes()";
     try {
         if ($token)
@@ -24,6 +18,7 @@ Flight::route('GET /api/get/almacen', function() use($id_usuario, $token, $db) {
             $flag = Verify::token(array('idUsuario'=>$id_usuario,'token'=>$token));
             if ($flag)
             {
+                $db = Connection::getConnection();
                 $stm = $db->prepare($query);
                 $isGood = $stm->execute();
                 if ($isGood){
@@ -42,7 +37,7 @@ Flight::route('GET /api/get/almacen', function() use($id_usuario, $token, $db) {
 });
 
 // Obtener los datos de todos los productos
-Flight::route('GET /api/get/productos', function() use($id_usuario, $token, $db) {
+Flight::route('GET /api/get/productos', function() use($id_usuario, $token) {
     $query = "CALL get_all_products()";
     try {
         if ($token)
@@ -50,6 +45,7 @@ Flight::route('GET /api/get/productos', function() use($id_usuario, $token, $db)
             $flag = Verify::token(array('idUsuario'=>$id_usuario,'token'=>$token));
             if ($flag)
             {
+                $db = Connection::getConnection();
                 $stm = $db->prepare($query);
                 $isGood = $stm->execute();
                 if ($isGood){
@@ -71,7 +67,7 @@ Flight::route('GET /api/get/productos', function() use($id_usuario, $token, $db)
 
 // region Para crear nuevos recursos
 // Crear un nuevo producto
-Flight::route('POST /api/crear/producto', function () use($id_usuario, $body, $token, $db) {
+Flight::route('POST /api/crear/producto', function () use($id_usuario, $body, $token) {
     $query = "CALL set_registrar_producto(:nombre,:unidad_de_compra,:unidad_de_venta,:categoria,:presentacion,:contenido,:descuento,:precio,:sustancia_activa,:descripcion,:ubicacion,:costo_por_unidad,:codigo_de_barras)";
     try {
 
@@ -80,6 +76,7 @@ Flight::route('POST /api/crear/producto', function () use($id_usuario, $body, $t
             $flag = Verify::token(array('idUsuario'=>$id_usuario,'token'=>$token));
             if ($flag)
             {
+                $db = Connection::getConnection();
                 $stm = $db->prepare($query);
                 $isGood = $stm->execute([
                     "nombre" => $body["nombre"],
@@ -109,7 +106,7 @@ Flight::route('POST /api/crear/producto', function () use($id_usuario, $body, $t
 });
 
 // Crear un nuevo traslado
-Flight::route('POST /api/abrir/traslado', function () use($id_usuario, $body, $token, $db) {
+Flight::route('POST /api/abrir/traslado', function () use($id_usuario, $body, $token) {
     $query = "CALL op_abrir_traslado(:idProducto,:idAlmacenOrigen,:idAlmacenDestino,:cantidad,:idUsuario)";
     try {
         if ($token && $id_usuario)
@@ -117,6 +114,7 @@ Flight::route('POST /api/abrir/traslado', function () use($id_usuario, $body, $t
             $flag = Verify::token(array('idUsuario'=>$id_usuario,'token'=>$token));
             if ($flag)
             {
+                $db = Connection::getConnection();
                 $stm = $db->prepare($query);
                 $isGood = $stm->execute([
                     "idProducto"=>$body['idProducto'],

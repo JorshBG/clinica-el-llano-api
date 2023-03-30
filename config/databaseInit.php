@@ -2,6 +2,4 @@
 
 use ElLlano\Api\models\Connection;
 
-
-
-$db = null;
+Connection::create();

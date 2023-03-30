@@ -3,7 +3,7 @@
 use ElLlano\Api\middleware\Role;
 use ElLlano\Api\models\Connection;
 
-$db = Connection::getConnection();
+
 $id_usuario = Flight::request()->query['idUsuario']??false;
 
 Flight::route('/test1', function (){
@@ -12,8 +12,9 @@ Flight::route('/test1', function (){
 
 
 
-Flight::route('GET /test/db', function() use($db) {
+Flight::route('GET /test/db', function()  {
     $query = "CALL get_all_almacenes();";
+    $db = Connection::getConnection();
     try {
         $stm = $db->prepare($query);
         $isGood = $stm->execute();
@@ -52,5 +53,3 @@ Flight::route('GET /api/variables', function () use ($id_usuario) {
     Flight::json(['isValid'=>$validation]);
 
 });
-
-$db = null;

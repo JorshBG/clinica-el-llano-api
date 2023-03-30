@@ -3,7 +3,6 @@
 use ElLlano\Api\controllers\Token;
 use ElLlano\Api\models\Connection;
 
-$db = Connection::getConnection();
 $isAjax = Flight::request()->ajax;
 $ip = Flight::request()->ip;
 $header = getallheaders();
@@ -18,10 +17,11 @@ Flight::route('GET|POST /api/greeting', function (){
 // endregion
 
 // region Validar el usuario y retornar el token
-Flight::route('POST /api/validar', function() use($ip, $db, $body) {
+Flight::route('POST /api/validar', function() use($ip, $body) {
     $query = "CALL validar_usuario(:email);";
     $excluir = "password";
     try {
+        $db = Connection::getConnection();
         $stm = $db->prepare($query);
         $isGood = $stm->execute(["email"=>$body['email']]);
         if ($isGood){
@@ -52,8 +52,9 @@ Flight::route('POST /api/validar', function() use($ip, $db, $body) {
 // endregion
 
 // region Crear un nuevo usuario
-Flight::route('POST /api/crear/usuario', function () use($body, $db){
+Flight::route('POST /api/crear/usuario', function () use($body){
     try{
+        $db = Connection::getConnection();
         $stm = $db->prepare('CALL set_registrar_usuario(:name,:password,:role,:email)');
         $flag = $stm->execute([
             "name"=>$body['nombre'],
@@ -71,7 +72,8 @@ Flight::route('POST /api/crear/usuario', function () use($body, $db){
 // endregion
 
 // region Cerrar sesión
-Flight::route('GET /api/cerrar/sesion', function () use ($ip, $body, $db) {
+Flight::route('GET /api/cerrar/sesion', function () use ($ip, $body) {
+    $db = Connection::getConnection();
     $stm = $db->prepare("CALL op_cerrar_sesion(:id_usuario, :ip)");
     $flag = $stm->execute(['id_usuario'=>$body['idUsuario'], 'ip'=>$ip]);
 });

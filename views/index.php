@@ -86,10 +86,10 @@
                         <a href="/dashboard" class="nav-link">Dashboard</a>
                     </li>
                     <li class="nav-item me-2">
-                        <a href="/views/pages/examples/sign-in.html" class="nav-link">Login</a>
+                        <a href="/views/pages/sign-in.php" class="nav-link">Login</a>
                     </li>
                     <li class="nav-item me-2">
-                        <a href="/views/pages/examples/sign-up.html" class="nav-link">Register</a>
+                        <a href="/views/pages/sign-up.php" class="nav-link">Register</a>
                     </li>
                     <li class="nav-item">
                         <a href="/views/pages/examples/lock.html" class="nav-link">Lock</a>
@@ -280,7 +280,7 @@
                         </a>
                     </div>
                     <div class="col-6 mb-5">
-                        <a href="/views/pages/examples/sign-in.html" class="page-preview scale-up-2">
+                        <a href="/views/pages/sign-in.php" class="page-preview scale-up-2">
                             <img class="shadow-lg rounded scale" src="/views/assets/img/pages/sign-in.jpg" alt="Sign In page preview">
                             <div class="text-center show-on-hover rounded-bottom">
                                 <h6 class="m-0 text-center d-inline-flex align-items-center text-white">Sign In <svg class="icon icon-xs ms-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path></svg></h6>
@@ -288,7 +288,7 @@
                         </a>
                     </div>
                     <div class="col-6 mb-5">
-                        <a href="/views/pages/examples/sign-up.html" class="page-preview scale-up-2">
+                        <a href="/views/pages/sign-up.php" class="page-preview scale-up-2">
                             <img class="shadow-lg rounded scale" src="/views/assets/img/pages/sign-up.jpg" alt="Sign Up page preview">
                             <div class="text-center show-on-hover rounded-bottom">
                                 <h6 class="m-0 text-center d-inline-flex align-items-center text-white">Sign Up <svg class="icon icon-xs ms-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path></svg></h6>
