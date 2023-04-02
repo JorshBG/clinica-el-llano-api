@@ -1,42 +1,36 @@
 <?php
 
+session_start();
+$isActive = $_SESSION['active']??false;
 
 Flight::route('GET /',function()
 {
     Flight::redirect('/sign-in');
 });
 
-Flight::route('GET /dashboard',function()
+Flight::route('GET /dashboard',function() use($isActive)
 {
-    Flight::render('pages/dashboard/dashboard');
+    if ($isActive){
+        Flight::render('pages/dashboard/dashboard');
+    } else {
+        Flight::unauthorized();
+    }
 });
 
-Flight::route('GET /sign-in',function()
+Flight::route('GET /sign-in',function() use($isActive)
 {
-    Flight::render('pages/sign-in');
+    if ($isActive){
+        Flight::redirect('/dashboard');
+    } else {
+        Flight::render('pages/sign-in');
+    }
 });
 
-Flight::route('GET /sign-up',function()
+Flight::route('GET /sign-up',function() use($isActive)
 {
-    Flight::render('pages/sign-up');
-});
-
-Flight::route('GET /',function()
-{
-
-});
-
-Flight::route('GET /',function()
-{
-
-});
-
-//
-Flight::map('notFound', function()
-{
-    Flight::render('pages/errors/404');
-});
-//
-Flight::map('error',function (){
-    Flight::render('pages/errors/500');
+    if ($isActive){
+        Flight::redirect('/dashboard');
+    } else {
+        Flight::render('pages/sign-up');
+    }
 });

@@ -36,6 +36,11 @@ Flight::route('POST /api/validar', function() use($ip, $body) {
                         "token"=>$token,
                         'ipv4'=>$ip
                     ]);
+
+
+                    $_SESSION['active'] = true;
+                    $_SESSION['userID'] =  $userResult['ID'];
+
                     $stm->closeCursor();
                     Flight::json(['isValid' => true, 'data'=>array_diff_assoc($userResult, array($excluir => $userResult[$excluir])), 'token'=>$token]);
                 } else {

@@ -9,6 +9,8 @@ require_once ROOT . 'config/databaseInit.php';
 
 require_once ROOT . 'routes/pages.php';
 
+require_once ROOT . 'config/mapFlight.php';
+
 require_once ROOT . 'routes/web.php';
 
 require_once ROOT . 'routes/api/default.php';
