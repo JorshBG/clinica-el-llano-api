@@ -1,14 +1,8 @@
 import api from '/config/api.js'
+import Message  from "/views/pages/components/Message.js"
 document.addEventListener('DOMContentLoaded', ()=>{
     const form_sign_in = document.getElementById('form_sign-in')
 
-    const swalWithBootstrapButtons = Swal.mixin({
-        customClass: {
-            confirmButton: 'btn btn-primary',
-            cancelButton: 'btn btn-gray'
-        },
-        buttonsStyling: false
-    });
 
     form_sign_in.onsubmit = (e) => {
         e.preventDefault()
@@ -23,33 +17,17 @@ document.addEventListener('DOMContentLoaded', ()=>{
                         sessionStorage.setItem('role',res.data.Rol)
                         sessionStorage.setItem('isActive', 'true')
 
-                        swalWithBootstrapButtons.fire({
-                            icon: 'success',
-                            title: 'Inicio exitoso',
-                            text: 'Te vamos a redirigir al dashboard',
-                            showConfirmButton: true,
-                            timer: 1500
-                        })
+                        successMessage()
+
                         setTimeout(()=>{redirectto()}, 2000)
                     } else {
-                        swalWithBootstrapButtons.fire({
-                            icon: 'warning',
-                            title: 'Error de credenciales',
-                            text: 'Tú correo o contraseña es incorrecto, revísalo',
-                            showConfirmButton: true,
-
-                        })
+                        warningMessage()
                     }
                 })
                 .catch(err => console.log(err)))
             .catch(
                 e => {
-                    swalWithBootstrapButtons.fire({
-                        icon: 'error',
-                        title: 'Error inesperado',
-                        text: 'No nos hemos podido comunicar con el servidor, inténtalo más tarde',
-                        showConfirmButton: true,
-                    })
+                    errorMessage()
                     console.log(e)
                 }
             )
@@ -66,4 +44,33 @@ async function sign_in() {
 
 function redirectto(){
     window.location.href = '/dashboard';
+}
+
+function successMessage(){
+    Message.fire({
+        icon: 'success',
+        title: 'Inicio exitoso',
+        text: 'Te vamos a redirigir al dashboard',
+        showConfirmButton: true,
+        timer: 1500
+    })
+}
+
+function errorMessage(){
+    Message.fire({
+        icon: 'error',
+        title: 'Error inesperado',
+        text: 'No nos hemos podido comunicar con el servidor, inténtalo más tarde',
+        showConfirmButton: true,
+    })
+}
+
+function warningMessage(){
+    Message.fire({
+        icon: 'warning',
+        title: 'Error de credenciales',
+        text: 'Tú correo o contraseña es incorrecto, revísalo',
+        showConfirmButton: true,
+
+    })
 }
