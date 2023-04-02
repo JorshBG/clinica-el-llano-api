@@ -120,7 +120,7 @@
                             <div class="d-flex justify-content-center align-items-center mt-4">
                                 <span class="fw-normal">
                                     ¿Aún no te has registrado?
-                                    <a href="sign-up.php" class="fw-bold"><b>Crea una cuenta</b></a>
+                                    <a href="/sign-up" class="fw-bold"><b>Crea una cuenta</b></a>
                                 </span>
                             </div>
                         </div>

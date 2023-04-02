@@ -128,7 +128,7 @@
                             <div class="d-flex justify-content-center align-items-center mt-4">
                                 <span class="fw-normal">
                                     ¿Ya tienes una cuenta?
-                                    <a href="sign-in.php" class="fw-bold"><b>Inicia sesión aquí</b></a>
+                                    <a href="/sign-in" class="fw-bold"><b>Inicia sesión aquí</b></a>
                                 </span>
                             </div>
                         </div>
