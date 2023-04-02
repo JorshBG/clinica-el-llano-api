@@ -34,3 +34,11 @@ Flight::route('GET /sign-up',function() use($isActive)
         Flight::render('pages/sign-up');
     }
 });
+
+Flight::route('GET /sign-out', function()
+{
+    Flight::clear();
+    unset($_SESSION['active']);
+    unset($_SESSION['userID']);
+    Flight::redirect('/');
+});
