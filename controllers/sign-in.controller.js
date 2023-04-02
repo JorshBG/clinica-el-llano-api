@@ -1,11 +1,15 @@
 import api from '/config/api.js'
 import Message  from "/views/pages/components/Message.js"
+import Spinner from "/views/pages/components/Spinner.js";
+import Button from "/views/pages/components/Button.js";
 document.addEventListener('DOMContentLoaded', ()=>{
     const form_sign_in = document.getElementById('form_sign-in')
+    const btnLogin = document.querySelector('#sign-in_btnLogin');
 
 
     form_sign_in.onsubmit = (e) => {
         e.preventDefault()
+        btnLogin.innerHTML = Spinner();
         sign_in()
             .then(r => r.json()
                 .then(res=>{
@@ -18,10 +22,11 @@ document.addEventListener('DOMContentLoaded', ()=>{
                         sessionStorage.setItem('isActive', 'true')
 
                         successMessage()
-
+                        btnLogin.innerHTML = Button('Iniciar sesión', 'submit', 'btn btn-gray-800')
                         setTimeout(()=>{redirectto()}, 2000)
                     } else {
                         warningMessage()
+                        btnLogin.innerHTML = Button('Iniciar sesión', 'submit', 'btn btn-gray-800')
                     }
                 })
                 .catch(err => console.log(err)))
@@ -31,9 +36,14 @@ document.addEventListener('DOMContentLoaded', ()=>{
                     console.log(e)
                 }
             )
+
     }
 
 })
+
+
+
+
 
 async function sign_in() {
     const email = document.querySelector('#email').value
@@ -41,6 +51,13 @@ async function sign_in() {
 
    return await api('/api/validar','POST',JSON.stringify({email, password}))
 }
+
+
+
+
+
+
+
 
 function redirectto(){
     window.location.href = '/dashboard';

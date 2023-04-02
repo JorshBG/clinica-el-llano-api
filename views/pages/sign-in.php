@@ -99,8 +99,11 @@
 <!--                                            </a></div>-->
 <!--                                    </div>-->
                                 </div>
-                                <div class="d-grid">
+                                <div class="d-grid" id="sign-in_btnLogin">
                                     <button type="submit" class="btn btn-gray-800">Iniciar sesión</button>
+<!--                                    <div class="spinner-border text-dark" role="status">-->
+<!--                                        <span class="visually-hidden">Loading...</span>-->
+<!--                                    </div>-->
                                 </div>
                             </form>
 <!--                            <div class="mt-3 mb-4 text-center">-->
