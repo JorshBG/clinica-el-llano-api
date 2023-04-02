@@ -15,7 +15,7 @@ class Token
         $message = $hash;
 
 // Llave de cifrado 32 caracteres
-        $key = 'a%2mklda#24DCX234cADL#4sqD4wqa13';
+        $key = ENCRYPTIONKEY;
 
 // Generar un vector de inicialización aleatorio
         $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length('aes-256-cbc'));
