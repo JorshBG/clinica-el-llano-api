@@ -37,8 +37,19 @@ Flight::route('GET /sign-up',function() use($isActive)
 
 Flight::route('GET /sign-out', function()
 {
-    Flight::clear();
-    unset($_SESSION['active']);
-    unset($_SESSION['userID']);
-    Flight::redirect('/');
+    if (isset($_SESSION['active'])){
+        Flight::clear();
+
+        try{
+            $db = \ElLlano\Api\models\Connection::getConnection();
+            $stm = $db->prepare('CALL op_delete_token(:idUsuario)');
+            $stm->execute(['idUsuario'=>$_SESSION['userID']]);
+        } catch (PDOException|Exception $ex) {
+            Flight::json(['message' => 'Se ha producido un error en el servidor', 'error'=>$e->getMessage()], 500);
+        }
+        unset($_SESSION['active']);
+        unset($_SESSION['userID']);
+
+        Flight::redirect('/');
+    }
 });
