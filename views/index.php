@@ -89,7 +89,7 @@
                         <a href="/views/pages/sign-in.php" class="nav-link">Login</a>
                     </li>
                     <li class="nav-item me-2">
-                        <a href="/views/pages/sign-up.php" class="nav-link">Register</a>
+                        <a href="/views/pages/sign-up.php" class="nav-link">Registers</a>
                     </li>
                     <li class="nav-item">
                         <a href="/views/pages/examples/lock.html" class="nav-link">Lock</a>
