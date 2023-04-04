@@ -15,11 +15,11 @@ require_once ROOT . 'routes/web.php';
 
 require_once ROOT . 'routes/api/default.php';
 //
-//require_once ROOT . 'routes/api/admin.php';
+require_once ROOT . 'routes/api/admin.php';
 //
-//require_once ROOT . 'routes/api/medics.php';
+require_once ROOT . 'routes/api/medics.php';
 //
-//require_once ROOT . 'routes/api/allUsers.php';
+require_once ROOT . 'routes/api/allUsers.php';
 
 require_once ROOT . 'test/apiTest.php';
 
