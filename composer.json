@@ -6,11 +6,9 @@
         }
     },
     "require": {
-        "illuminate/database": "^10.4",
         "mikecao/flight": "^2.0",
         "vlucas/phpdotenv": "^5.5",
         "ext-pdo": "*",
-      "ext-openssl": "*",
-        "fruitcake/php-cors": "^1.2"
+      "ext-openssl": "*"
     }
 }
