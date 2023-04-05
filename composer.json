@@ -11,6 +11,7 @@
         "vlucas/phpdotenv": "^5.5",
         "ext-pdo": "*",
       "ext-openssl": "*",
-        "fruitcake/php-cors": "^1.2"
+        "fruitcake/php-cors": "^1.2",
+        "twbs/bootstrap-icons": "^1.10"
     }
 }

@@ -1,14 +1,17 @@
-async function api(path, method = 'GET', body = JSON.stringify({"key":"value"}), headers ={'Content-Type': 'application/json'}) {
+async function api(path, method = 'GET', body = JSON.stringify({"key":"value"}), headers) {
     const baseUrl = 'http://el_llano_api.gob';
     switch (method){
         case "GET":
+            if (headers){
+                return await fetch(baseUrl + path + '?idUsuario=' + sessionStorage.getItem('id'),{headers});
+            }
             return await fetch(baseUrl + path);
         case "PUT":
         case "POST":
         case "DELETE":
             return await fetch(baseUrl + path, {
                 method,
-                headers,
+                headers:headers,
                 body
             });
         default:

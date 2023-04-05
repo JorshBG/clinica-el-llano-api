@@ -49,7 +49,7 @@ async function sign_in() {
     const email = document.querySelector('#email').value
     const password = document.querySelector('#password').value
 
-   return await api('/api/validar','POST',JSON.stringify({email, password}))
+   return await api('/api/validar','POST',JSON.stringify({email, password}), {'Content-Type': 'application/json'})
 }
 
 

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e3e2dbadb0e5700ec2002c009cc7c1a9",
+    "content-hash": "94c8d058ee6c4cd36b2db58cf3bad37d",
     "packages": [
         {
             "name": "brick/math",
@@ -1571,6 +1571,45 @@
                 }
             ],
             "time": "2023-03-01T10:32:47+00:00"
+        },
+        {
+            "name": "twbs/bootstrap-icons",
+            "version": "v1.10.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/twbs/icons.git",
+                "reference": "d7747f9b467de4d62841e2308367a88eaacc9aac"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twbs/icons/zipball/d7747f9b467de4d62841e2308367a88eaacc9aac",
+                "reference": "d7747f9b467de4d62841e2308367a88eaacc9aac",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mark Otto",
+                    "email": "markdotto@gmail.com"
+                }
+            ],
+            "description": "Official open source SVG icon library for Bootstrap",
+            "homepage": "https://icons.getbootstrap.com/",
+            "keywords": [
+                "bootstrap",
+                "icon font",
+                "icons",
+                "svg"
+            ],
+            "support": {
+                "issues": "https://github.com/twbs/icons/issues",
+                "source": "https://github.com/twbs/icons/tree/v1.10.4"
+            },
+            "time": "2023-04-03T18:12:42+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
