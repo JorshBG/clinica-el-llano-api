@@ -1,4 +1,5 @@
 import CallMenus from "/controllers/load/menus/menu.controller.js";
+import api from "/config/api.js";
 
 document.addEventListener('DOMContentLoaded', async () => {
     const btnLogout = document.querySelector('#dashboard_btnLogout');
@@ -11,28 +12,19 @@ document.addEventListener('DOMContentLoaded', async () => {
         element.innerText = sessionStorage.getItem('name')
     }
 
-    const menus = await CallMenus();
+    const menus = document.getElementById('dashboard_user-menus').children
 
-    const sideBar = document.getElementById('dashboard_side-bar');
-
-    for (const menu of menus) {
-        sideBar.appendChild(menu)
-    }
+    await renderView('/dashboard/view/dashboard')
 
 
 
-    // let writeMenus = "holasdasd"
+    // const menus = await CallMenus();
     //
-    // Object.keys(menus).forEach(function (key, index){
+    // const sideBar = document.getElementById('dashboard_side-bar');
     //
-    //     writeMenus =+ "\"" + menus[key] + "\"" + " <br/>"
-    //     console.log(menus[key])
-    //
-    // })
-    //
-    // console.log(writeMenus)
-    //
-    // sideBar.innerHTML = writeMenus
+    // for (const menu of menus) {
+    //     sideBar.appendChild(menu)
+    // }
 
 })
 
@@ -41,5 +33,13 @@ function sign_out(){
     sessionStorage.clear();
 
     window.location.href = '/sign-out'
+
+}
+
+async function renderView(ref) {
+
+    let res = await api(ref)
+
+    // console.log(await res.text())
 
 }

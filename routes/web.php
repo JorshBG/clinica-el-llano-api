@@ -11,7 +11,14 @@ Flight::route('GET /',function()
 Flight::route('GET /dashboard',function() use($isActive)
 {
     if ($isActive){
-        Flight::render('pages/dashboard/dashboard');
+        // Renderizar Menu bar views/pages/partials/MenuBar.php
+//        views/pages/partials/SideMenusAdmin.php
+        Flight::render('pages/partials/MenuBar', null, 'menuBar');
+        Flight::render('pages/partials/NavBar', null, 'navBar');
+        Flight::render('pages/partials/SideMenusAdmin', null, 'menus');
+        Flight::render('pages/partials/SideBar', null, 'sideBar');
+        Flight::render('pages/menus/admin/dashboard', null, 'content');
+        Flight::render('index');
     } else {
         Flight::unauthorized();
     }
@@ -49,7 +56,17 @@ Flight::route('GET /sign-out', function()
         }
         unset($_SESSION['active']);
         unset($_SESSION['userID']);
+        unset($_SESSION['userRole']);
 
         Flight::redirect('/');
     }
 });
+
+// region Admin views on dashboard
+
+Flight::route('GET /dashboard/view/dashboard', function()
+{
+    Flight::render('pages/menus/admin/dashboard');
+});
+
+// endregion

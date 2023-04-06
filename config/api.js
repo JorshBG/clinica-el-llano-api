@@ -5,11 +5,11 @@ async function api(path, method = 'GET', body = JSON.stringify({"key":"value"}),
             if (headers){
                 return await fetch(baseUrl + path + '?idUsuario=' + sessionStorage.getItem('id'),{headers:headers});
             }
-            return await fetch(baseUrl + path);
+            return await fetch(baseUrl + path + '?idUsuario=' + sessionStorage.getItem('id'));
         case "PUT":
         case "POST":
         case "DELETE":
-            return await fetch(baseUrl + path, {
+            return await fetch(baseUrl + path + '?idUsuario=' + sessionStorage.getItem('id'), {
                 method,
                 headers:headers,
                 body
