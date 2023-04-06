@@ -3,7 +3,7 @@ async function api(path, method = 'GET', body = JSON.stringify({"key":"value"}),
     switch (method){
         case "GET":
             if (headers){
-                return await fetch(baseUrl + path + '?idUsuario=' + sessionStorage.getItem('id'),{headers});
+                return await fetch(baseUrl + path + '?idUsuario=' + sessionStorage.getItem('id'),{headers:headers});
             }
             return await fetch(baseUrl + path);
         case "PUT":

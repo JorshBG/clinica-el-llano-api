@@ -1,4 +1,4 @@
-import CallMenus from "/controllers/load/menus/medic.controller.js";
+import CallMenus from "/controllers/load/menus/menu.controller.js";
 
 document.addEventListener('DOMContentLoaded', async () => {
     const btnLogout = document.querySelector('#dashboard_btnLogout');

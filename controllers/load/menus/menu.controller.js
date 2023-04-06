@@ -4,9 +4,12 @@ import Menu from '/views/pages/components/Menu.js'
 async function getMenus(){
 
     let res =  await api(`/api/get/menus`, 'GET', undefined, {
-        'x-api-key': sessionStorage.getItem('token')??undefined
+        'x-api-key': sessionStorage.getItem('token')
     });
-    if (!res.ok) throw new Error("Error de acceso a los menus del usuario")
+    if (!res.ok) {
+        console.error("Error de acceso a los menus del usuario")
+        return
+    }
     return res;
 }
 
