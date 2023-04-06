@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     form_sign_in.onsubmit = (e) => {
         e.preventDefault()
         btnLogin.innerHTML = Spinner();
+        btnLogin.classList.add('justify-content-center')
         sign_in()
             .then(r => r.json()
                 .then(res=>{
@@ -23,10 +24,12 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
                         successMessage()
                         btnLogin.innerHTML = Button('Iniciar sesión', 'submit', 'btn btn-gray-800')
+                        btnLogin.classList.remove('justify-content-center')
                         setTimeout(()=>{redirectto()}, 2000)
                     } else {
                         warningMessage()
                         btnLogin.innerHTML = Button('Iniciar sesión', 'submit', 'btn btn-gray-800')
+                        btnLogin.classList.remove('justify-content-center')
                     }
                 })
                 .catch(err => console.log(err)))

@@ -43,6 +43,9 @@
 <!-- Volt CSS -->
 <link type="text/css" href="/views/css/volt.css" rel="stylesheet">
 
+
+    <link type="text/css" href="/views/css/el-llano-styles.css" rel="stylesheet">
+
 <!-- NOTICE: You can use the _analytics.html partial to include production code specific code & trackers -->
 
 </head>
