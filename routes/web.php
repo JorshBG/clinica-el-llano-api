@@ -15,9 +15,23 @@ Flight::route('GET /dashboard',function() use($isActive)
 //        views/pages/partials/SideMenusAdmin.php
         Flight::render('pages/partials/MenuBar', null, 'menuBar');
         Flight::render('pages/partials/NavBar', null, 'navBar');
-        Flight::render('pages/partials/SideMenusAdmin', null, 'menus');
+        switch ($_SESSION['userRole']){
+            case 'ADMINISTRADOR':
+                Flight::render('pages/partials/SideMenusAdmin', null, 'menus');
+                break;
+            case 'MEDICO ESPECIALISTA':
+            case 'MEDICO':
+                Flight::render('pages/partials/SideMenusMedics', null, 'menus');
+                break;
+            case 'ENFERMERA':
+            case 'EMPLEADA':
+                Flight::render('pages/partials/SideMenusEmployee', null, 'menus');
+                break;
+            default:
+                break;
+        }
         Flight::render('pages/partials/SideBar', null, 'sideBar');
-        Flight::render('pages/menus/admin/dashboard', null, 'content');
+        Flight::render('pages/menus/general/dashboard', null, 'content');
         Flight::render('index');
     } else {
         Flight::unauthorized();
