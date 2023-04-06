@@ -1,5 +1,5 @@
 <li class="nav-item">
-    <a class="nav-link d-flex align-items-center">
+    <a class="nav-link d-flex align-items-center" href="/dashboard/view/index">
           <span class="sidebar-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-speedometer"
                  viewBox="0 0 16 16">
@@ -13,7 +13,7 @@
 </li>
 
 <li class="nav-item">
-    <a class="nav-link d-flex align-items-center">
+    <a class="nav-link d-flex align-items-center" href="/dashboard/view/productos">
           <span class="sidebar-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                  class="bi bi-archive-fill" viewBox="0 0 16 16">
@@ -25,7 +25,7 @@
 </li>
 
 <li class="nav-item">
-    <a class="nav-link d-flex align-items-center">
+    <a class="nav-link d-flex align-items-center" href="/dashboard/view/usuarios">
           <span class="sidebar-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people-fill"
                  viewBox="0 0 16 16">
@@ -37,7 +37,7 @@
 </li>
 
 <li class="nav-item">
-    <a class="nav-link d-flex align-items-center">
+    <a class="nav-link d-flex align-items-center" href="/dashboard/view/traslados">
           <span class="sidebar-icon">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bus-front"
                    viewBox="0 0 16 16">
@@ -50,7 +50,7 @@
 </li>
 
 <li class="nav-item">
-    <a class="nav-link d-flex align-items-center">
+    <a class="nav-link d-flex align-items-center" href="/dashboard/view/ordenes">
           <span class="sidebar-icon">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                    class="bi bi-cart-check-fill" viewBox="0 0 16 16">
@@ -62,7 +62,7 @@
 </li>
 
 <li class="nav-item">
-    <a class="nav-link d-flex align-items-center">
+    <a class="nav-link d-flex align-items-center" href="/dashboard/view/ventas">
           <span class="sidebar-icon">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                    class="bi bi-bag-check-fill" viewBox="0 0 16 16">
@@ -75,7 +75,7 @@
 </li>
 
 <li class="nav-item">
-    <a class="nav-link d-flex align-items-center">
+    <a class="nav-link d-flex align-items-center" href="/dashboard/view/consumos">
           <span class="sidebar-icon">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                    class="bi bi-basket3-fill" viewBox="0 0 16 16">

@@ -15,16 +15,14 @@ Flight::route('GET /dashboard',function() use($isActive)
 //        views/pages/partials/SideMenusAdmin.php
         Flight::render('pages/partials/MenuBar', null, 'menuBar');
         Flight::render('pages/partials/NavBar', null, 'navBar');
-        switch ($_SESSION['userRole']){
-            case 'ADMINISTRADOR':
+        switch ($_SESSION['userAlmacen']){
+            case 'GENERAL':
                 Flight::render('pages/partials/SideMenusAdmin', null, 'menus');
                 break;
-            case 'MEDICO ESPECIALISTA':
-            case 'MEDICO':
+            case 'HOSPITAL':
                 Flight::render('pages/partials/SideMenusMedics', null, 'menus');
                 break;
-            case 'ENFERMERA':
-            case 'EMPLEADA':
+            case 'FARMACIA':
                 Flight::render('pages/partials/SideMenusEmployee', null, 'menus');
                 break;
             default:

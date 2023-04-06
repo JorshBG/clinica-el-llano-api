@@ -32,11 +32,16 @@ document.addEventListener('DOMContentLoaded', ()=>{
                         btnLogin.classList.remove('justify-content-center')
                     }
                 })
-                .catch(err => console.log(err)))
+                .catch(err => {
+                    userNotFound()
+                    btnLogin.innerHTML = Button('Iniciar sesión', 'submit', 'btn btn-gray-800')
+                    btnLogin.classList.remove('justify-content-center')
+                }))
             .catch(
                 e => {
                     errorMessage()
-                    console.log(e)
+                    btnLogin.innerHTML = Button('Iniciar sesión', 'submit', 'btn btn-gray-800')
+                    btnLogin.classList.remove('justify-content-center')
                 }
             )
 
@@ -90,6 +95,16 @@ function warningMessage(){
         icon: 'warning',
         title: 'Error de credenciales',
         text: 'Tú correo o contraseña es incorrecto, revísalo',
+        showConfirmButton: true,
+
+    })
+}
+
+function userNotFound(){
+    Message.fire({
+        icon: 'warning',
+        title: 'No se han encontrado el usuario',
+        text: 'Tú correo no está registrado en el sistema, si crees que es un error consulta con un administrador',
         showConfirmButton: true,
 
     })
