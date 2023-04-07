@@ -36,13 +36,20 @@ Flight::route('POST /api/validar', function() use($ip, $body) {
                         "token"=>$token,
                         'ipv4'=>$ip
                     ]);
+
+
+                    $_SESSION['active'] = true;
+                    $_SESSION['userID'] =  $userResult['ID'];
+                    $_SESSION['userRole'] =  $userResult['Rol'];
+                    $_SESSION['userAlmacen'] =  $userResult['Almacen'];
+
                     $stm->closeCursor();
                     Flight::json(['isValid' => true, 'data'=>array_diff_assoc($userResult, array($excluir => $userResult[$excluir])), 'token'=>$token]);
                 } else {
                     Flight::json(['result' => false]);
                 }
             } else {
-                Flight::json(['message'=>'no hay registros']);
+                Flight::json(['message'=>'no hay registros'], 204);
             }
         }
     } catch (PDOException|Exception $e){

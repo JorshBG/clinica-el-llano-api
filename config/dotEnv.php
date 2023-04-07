@@ -10,3 +10,6 @@ define("DBPASS", $_ENV['DBPASSWORD']);
 define("DBUSER", $_ENV['DBUSER']);
 define("DBHOST", $_ENV['DBHOST']);
 define("DBPORT", $_ENV['DBPORT']);
+
+// Constant to ENCRYPTION token key
+define("ENCRYPTIONKEY", $_ENV['ENCRYPTIONKEY']);
