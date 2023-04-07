@@ -1,5 +1,7 @@
 <?php
 
+use ElLlano\Api\models\Connection;
+
 session_start();
 $isActive = $_SESSION['active']??false;
 
@@ -60,16 +62,14 @@ Flight::route('GET /sign-out', function()
         Flight::clear();
 
         try{
-            $db = \ElLlano\Api\models\Connection::getConnection();
+            $db = Connection::getConnection();
             $stm = $db->prepare('CALL op_delete_token(:idUsuario)');
             $stm->execute(['idUsuario'=>$_SESSION['userID']]);
         } catch (PDOException|Exception $ex) {
-            Flight::json(['message' => 'Se ha producido un error en el servidor', 'error'=>$e->getMessage()], 500);
+            Flight::json(['message' => 'Se ha producido un error en el servidor', 'error'=>$ex->getMessage()], 500);
         }
-        unset($_SESSION['active']);
-        unset($_SESSION['userID']);
-        unset($_SESSION['userRole']);
-
+        session_unset();
+        session_destroy();
         Flight::redirect('/');
     }
 });
