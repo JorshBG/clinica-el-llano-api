@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     form_sign_in.onsubmit = (e) => {
         e.preventDefault()
         btnLogin.innerHTML = Spinner();
+        btnLogin.classList.add('justify-content-center')
         sign_in()
             .then(r => r.json()
                 .then(res=>{
@@ -23,17 +24,24 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
                         successMessage()
                         btnLogin.innerHTML = Button('Iniciar sesión', 'submit', 'btn btn-gray-800')
+                        btnLogin.classList.remove('justify-content-center')
                         setTimeout(()=>{redirectto()}, 2000)
                     } else {
                         warningMessage()
                         btnLogin.innerHTML = Button('Iniciar sesión', 'submit', 'btn btn-gray-800')
+                        btnLogin.classList.remove('justify-content-center')
                     }
                 })
-                .catch(err => console.log(err)))
+                .catch(err => {
+                    userNotFound()
+                    btnLogin.innerHTML = Button('Iniciar sesión', 'submit', 'btn btn-gray-800')
+                    btnLogin.classList.remove('justify-content-center')
+                }))
             .catch(
                 e => {
                     errorMessage()
-                    console.log(e)
+                    btnLogin.innerHTML = Button('Iniciar sesión', 'submit', 'btn btn-gray-800')
+                    btnLogin.classList.remove('justify-content-center')
                 }
             )
 
@@ -49,7 +57,7 @@ async function sign_in() {
     const email = document.querySelector('#email').value
     const password = document.querySelector('#password').value
 
-   return await api('/api/validar','POST',JSON.stringify({email, password}))
+   return await api('/api/validar','POST',JSON.stringify({email, password}), {'Content-Type': 'application/json'})
 }
 
 
@@ -87,6 +95,16 @@ function warningMessage(){
         icon: 'warning',
         title: 'Error de credenciales',
         text: 'Tú correo o contraseña es incorrecto, revísalo',
+        showConfirmButton: true,
+
+    })
+}
+
+function userNotFound(){
+    Message.fire({
+        icon: 'warning',
+        title: 'No se han encontrado el usuario',
+        text: 'Tú correo no está registrado en el sistema, si crees que es un error consulta con un administrador',
         showConfirmButton: true,
 
     })

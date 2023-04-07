@@ -23,7 +23,7 @@ class Verify
             $db=null;
             if ($token)
             {
-                if ($token === $content['token'])
+                if (addcslashes($token, '/\\') === $content['token'])
                 {
                     return true;
                 }

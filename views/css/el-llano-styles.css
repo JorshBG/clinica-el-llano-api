@@ -1,0 +1,8 @@
+.center-grid{
+    display: grid;
+    justify-items: center;
+}
+
+.w-full{
+    width: 100%;
+}
