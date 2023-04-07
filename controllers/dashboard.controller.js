@@ -1,4 +1,3 @@
-import CallMenus from "/controllers/load/menus/menu.controller.js";
 import api from "/config/api.js";
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -15,16 +14,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     const menus = document.getElementById('dashboard_user-menus').children
 
     await renderView('/dashboard/view/dashboard')
-
-
-
-    // const menus = await CallMenus();
-    //
-    // const sideBar = document.getElementById('dashboard_side-bar');
-    //
-    // for (const menu of menus) {
-    //     sideBar.appendChild(menu)
-    // }
 
 })
 

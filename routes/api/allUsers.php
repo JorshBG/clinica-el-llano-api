@@ -4,15 +4,7 @@ use ElLlano\Api\middleware\Verify;
 use ElLlano\Api\models\Connection;
 use Fruitcake\Cors\CorsService;
 
-
-$reqhead = [];
-
-foreach (getallheaders() as $head) {
-    $reqhead[] = $head;
-}
-
-
-$token = (getallheaders())['x-api-key'] ?? false;
+$token = $_SERVER['HTTP_X_API_KEY'] ?? false;
 $id_usuario = Flight::request()->query['idUsuario'] ?? false;
 $body = Flight::request()->data->getData();
 $ip = Flight::request()->ip;
@@ -133,9 +125,9 @@ Flight::route('GET /api/get/total/producto/general', function() use($token, $id_
     constraintWithoutRole($token, $id_usuario, $execution);
 });
 
-Flight::route('GET /api/get/menus', function() use($reqhead, $token,$id_usuario)
+Flight::route('GET /api/get/menus', function() use($token,$id_usuario)
 {
-    $execution = function() use($reqhead, $id_usuario)
+    $execution = function() use($id_usuario)
     {
         $queryRol = "CALL get_rol(:idUsuario)";
         $db = Connection::getConnection();
@@ -149,7 +141,7 @@ Flight::route('GET /api/get/menus', function() use($reqhead, $token,$id_usuario)
             $stm = $db->prepare($queryMenu);
             $stm->execute(['roleID'=>$role['rolID']]);
             $result = $stm->fetchALL();
-            Flight::json(['result'=>$result, 'headers' =>$reqhead, 'key' =>(getallheaders())['x-api-key'] ]);
+            Flight::json(['result'=>$result]);
         }
 
     };

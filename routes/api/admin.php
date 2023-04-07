@@ -6,7 +6,7 @@ use ElLlano\Api\models\Connection;
 
 $isAjax = Flight::request()->ajax;
 $ip = Flight::request()->ip;
-$token = (getallheaders())['x-api-key']??false;
+$token = $_SERVER['HTTP_X_API_KEY'] ?? false;
 $id_usuario = Flight::request()->query['idUsuario']??false;
 $body = Flight::request()->data->getData();
 $rol_required = "ADMINISTRADOR";

@@ -5,7 +5,7 @@ use ElLlano\Api\models\Connection;
 
 $isAjax = Flight::request()->ajax;
 $ip = Flight::request()->ip;
-$header = getallheaders();
+$token = $_SERVER['HTTP_X_API_KEY'] ?? false;
 $body = Flight::request()->data->getData();
 
 
@@ -38,10 +38,10 @@ Flight::route('POST /api/validar', function() use($ip, $body) {
                     ]);
 
 
-                    $_SESSION['active'] = true;
-                    $_SESSION['userID'] =  $userResult['ID'];
-                    $_SESSION['userRole'] =  $userResult['Rol'];
-                    $_SESSION['userAlmacen'] =  $userResult['Almacen'];
+//                    $_SESSION['active'] = true;
+//                    $_SESSION['userID'] =  $userResult['ID'];
+//                    $_SESSION['userRole'] =  $userResult['Rol'];
+//                    $_SESSION['userAlmacen'] =  $userResult['Almacen'];
 
                     $stm->closeCursor();
                     Flight::json(['isValid' => true, 'data'=>array_diff_assoc($userResult, array($excluir => $userResult[$excluir])), 'token'=>$token]);
