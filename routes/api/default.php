@@ -38,10 +38,10 @@ Flight::route('POST /api/validar', function() use($ip, $body) {
                     ]);
 
 
-//                    $_SESSION['active'] = true;
-//                    $_SESSION['userID'] =  $userResult['ID'];
-//                    $_SESSION['userRole'] =  $userResult['Rol'];
-//                    $_SESSION['userAlmacen'] =  $userResult['Almacen'];
+                    $_SESSION['active'] = true;
+                    $_SESSION['userID'] =  $userResult['ID'];
+                    $_SESSION['userRole'] =  $userResult['Rol'];
+                    $_SESSION['userAlmacen'] =  $userResult['Almacen'];
 
                     $stm->closeCursor();
                     Flight::json(['isValid' => true, 'data'=>array_diff_assoc($userResult, array($excluir => $userResult[$excluir])), 'token'=>$token]);

@@ -64,7 +64,7 @@
 <script src="/views/vendor/onscreen/dist/on-screen.umd.min.js"></script>
 
 <!-- Slider -->
-<script src="/views/vendor/nouislider/distribute/nouislider.min.js"></script>
+<script src="/views/vendor/nouislider/dist/nouislider.min.js"></script>
 
 <!-- Smooth scroll -->
 <script src="/views/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
