@@ -1,6 +1,6 @@
 <!-- DASHBOARD MENU -->
 <li class="nav-item">
-    <a class="nav-link d-flex align-items-center" href="/dashboard/view/index">
+    <a class="nav-link d-flex align-items-center nav-only-item" href="/dashboard/view/index">
   <span class="sidebar-icon">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-speedometer"
            viewBox="0 0 16 16">
@@ -13,8 +13,6 @@
         <span class="mt-1 ms-1 sidebar-text">Dashboard</span>
     </a>
 </li>
-
-
 <!--  Dropdown CATEGORIAS  -->
 <li class="nav-item">
             <span
@@ -49,13 +47,13 @@
         role="list"
         id="categories"
         aria-expanded="false">
-        <ul class="flex-column nav">
+        <ul class="flex-column nav dashboard_user-menus">
 
             <!--     ITEMS DEL DROPDOWN       -->
 
             <li class="nav-item">
                 <a
-                    class="nav-link"
+                    class="nav-link nav-only-item"
                     href="/dashboard/views/catalogo/productos"
                 ><span class="sidebar-text">Productos</span></a
                 >
@@ -63,7 +61,7 @@
 
             <li class="nav-item">
                 <a
-                    class="nav-link"
+                    class="nav-link nav-only-item"
                     href="/dashboard/views/catalogo/proveedores"
                 ><span class="sidebar-text">Proveedores</span></a
                 >
@@ -71,7 +69,7 @@
 
             <li class="nav-item">
                 <a
-                    class="nav-link"
+                    class="nav-link nav-only-item"
                     href="/dashboard/views/catalogo/unidad-de-medida"
                 ><span class="sidebar-text">Unidad de medida</span></a
                 >
@@ -80,7 +78,7 @@
 
             <li class="nav-item">
                 <a
-                    class="nav-link"
+                    class="nav-link nav-only-item"
                     href="/dashboard/views/catalogo/categorias"
                 ><span class="sidebar-text">Categorías</span></a
                 >
@@ -88,7 +86,7 @@
 
             <li class="nav-item">
                 <a
-                    class="nav-link"
+                    class="nav-link nav-only-item"
                     href="/dashboard/views/catalogo/almacenes"
                 ><span class="sidebar-text">Almacenes</span></a
                 >
@@ -138,7 +136,7 @@
 
             <li class="nav-item">
                 <a
-                    class="nav-link"
+                    class="nav-link nav-only-item"
                     href="/dashboard/views/catalogo/ordenes-de-pago"
                 ><span class="sidebar-text">Ordenes de pago</span></a
                 >
@@ -146,7 +144,7 @@
 
             <li class="nav-item">
                 <a
-                    class="nav-link"
+                    class="nav-link nav-only-item"
                     href="/dashboard/views/catalogo/pagos"
                 ><span class="sidebar-text">Pagos</span></a
                 >
@@ -155,8 +153,8 @@
 
             <li class="nav-item">
                 <a
-                    class="nav-link"
-                    href="/dashboard/views/catalogo/categorias"
+                    class="nav-link nav-only-item"
+                    href="/dashboard/views/catalogo/entradas"
                 ><span class="sidebar-text">Entradas</span></a
                 >
             </li>
@@ -206,16 +204,16 @@
 
             <li class="nav-item">
                 <a
-                    class="nav-link"
-                    href="/dashboard/views/catalogo/ordenes-de-pago"
+                    class="nav-link nav-only-item"
+                    href="/dashboard/views/catalogo/entradas"
                 ><span class="sidebar-text">Entradas</span></a
                 >
             </li>
 
             <li class="nav-item">
                 <a
-                    class="nav-link"
-                    href="/dashboard/views/catalogo/pagos"
+                    class="nav-link nav-only-item"
+                    href="/dashboard/views/catalogo/traspaso"
                 ><span class="sidebar-text">Traspaso</span></a
                 >
             </li>
@@ -223,8 +221,8 @@
 
             <li class="nav-item">
                 <a
-                    class="nav-link"
-                    href="/dashboard/views/catalogo/categorias"
+                    class="nav-link nav-only-item"
+                    href="/dashboard/views/catalogo/salidas"
                 ><span class="sidebar-text">Salidas</span></a
                 >
             </li>

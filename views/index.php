@@ -62,8 +62,11 @@
 
     <?php echo $menuBar?>
 
+    <div id="mainContent">
+
     <?php echo $content?>
 
+    </div>
 </main>
 
 <!-- Core -->

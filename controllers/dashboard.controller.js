@@ -11,9 +11,19 @@ document.addEventListener('DOMContentLoaded', async () => {
         element.innerText = sessionStorage.getItem('name')
     }
 
-    const menus = document.getElementById('dashboard_user-menus').children
+    const menus = document.getElementsByClassName('nav-only-item')
 
-    await renderView('/dashboard/view/dashboard')
+    const bodyContent = document.getElementById('mainContent');
+
+    for (const menu of menus) {
+        menu.addEventListener('click', async function (evt) {
+            evt.preventDefault();
+            bodyContent.innerHTML = await renderView(menu.pathname)
+            // console.log(menu.pathname);
+        })
+    }
+
+    // await renderView('/dashboard/view/dashboard')
 
 })
 
@@ -29,6 +39,6 @@ async function renderView(ref) {
 
     let res = await api(ref)
 
-    // console.log(await res.text())
+    return await res.text()
 
 }
