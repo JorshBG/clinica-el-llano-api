@@ -137,7 +137,7 @@
             <li class="nav-item">
                 <a
                     class="nav-link nav-only-item"
-                    href="/dashboard/views/catalogo/ordenes-de-pago"
+                    href="/dashboard/views/catalogo/ordenes-de-compra"
                 ><span class="sidebar-text">Ordenes de pago</span></a
                 >
             </li>
