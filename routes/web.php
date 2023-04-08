@@ -126,6 +126,20 @@ Flight::route('GET /dashboard/views/catalogo/productos', function()
 Flight::route('GET /dashboard/views/catalogo/proveedores', function()
 {
     Flight::render(
+        'pages/partials/Table',
+        array(
+            'dataName' => 'proveedores',
+            'headers' => array(
+                '#', 
+                'Nombre',
+                'Correo',
+                'Teléfono',
+                'RFC'
+                )
+        ),
+        'table'
+    );
+    Flight::render(
         'pages/partials/HeaderNav', 
         array(
             'title' => 'Proveedores registrados',
@@ -137,6 +151,28 @@ Flight::route('GET /dashboard/views/catalogo/proveedores', function()
 });
 Flight::route('GET /dashboard/views/catalogo/unidad-de-medida', function()
 {
+    Flight::render(
+        'pages/partials/Table',
+        array(
+            'dataName' => 'unidad de venta',
+            'headers' => array(
+                '#', 
+                'Unidad'
+                )
+        ),
+        'table_venta'
+    );
+    Flight::render(
+        'pages/partials/Table',
+        array(
+            'dataName' => 'unidad de compra',
+            'headers' => array(
+                '#', 
+                'Unidad'
+                )
+        ),
+        'table_compra'
+    );
     Flight::render(
         'pages/partials/HeaderNav', 
         array(
@@ -151,6 +187,17 @@ Flight::route('GET /dashboard/views/catalogo/unidad-de-medida', function()
 Flight::route('GET /dashboard/views/catalogo/categorias', function()
 {
     Flight::render(
+        'pages/partials/Table',
+        array(
+            'dataName' => 'categorias',
+            'headers' => array(
+                '#', 
+                'Categoría'
+                )
+        ),
+        'table'
+    );
+    Flight::render(
         'pages/partials/HeaderNav', 
         array(
             'title' => 'Categorias',
@@ -164,6 +211,18 @@ Flight::route('GET /dashboard/views/catalogo/categorias', function()
 Flight::route('GET /dashboard/views/catalogo/almacenes', function()
 {
     Flight::render(
+        'pages/partials/Table',
+        array(
+            'dataName' => 'almacenes',
+            'headers' => array(
+                '#', 
+                'Almacen',
+                'Descripción'
+                )
+        ),
+        'table'
+    );
+    Flight::render(
         'pages/partials/HeaderNav', 
         array(
             'title' => 'Almacenes registrados',
@@ -175,8 +234,25 @@ Flight::route('GET /dashboard/views/catalogo/almacenes', function()
 });
 #endregion
 #region compras dropdown
-Flight::route('GET /dashboard/views/catalogo/ordenes-de-pago', function()
+Flight::route('GET /dashboard/views/catalogo/ordenes-de-compra', function()
 {
+    Flight::render(
+        'pages/partials/Table',
+        array(
+            'dataName' => 'ordenes de compra',
+            'headers' => array(
+                '#', 
+                'Fecha de compra',
+                'Fecha de entrega',
+                'Método de pago',
+                'Proveedor',
+                'Realizó la compra',
+                'Estatus de entrega',
+                'Estatus de pago'
+                )
+        ),
+        'table'
+    );
     Flight::render(
         'pages/partials/HeaderNav', 
         array(
@@ -186,10 +262,24 @@ Flight::route('GET /dashboard/views/catalogo/ordenes-de-pago', function()
             'subtitle' => 'Ordenes de compra realizadas a los proveedores registrados'
         ), 
         'header_nav');
-    Flight::render('pages/menus/general/boughts/pay-orders');
+    Flight::render('pages/menus/general/boughts/bought-orders');
 });
 Flight::route('GET /dashboard/views/catalogo/pagos', function()
 {
+    Flight::render(
+        'pages/partials/Table',
+        array(
+            'dataName' => 'pagos',
+            'headers' => array(
+                '#', 
+                'Cantidad',
+                'Método de pago',
+                'Orden de compra',
+                'Cantidad'
+                )
+        ),
+        'table'
+    );
     Flight::render(
         'pages/partials/HeaderNav', 
         array(
@@ -204,6 +294,22 @@ Flight::route('GET /dashboard/views/catalogo/pagos', function()
 #region adminstracion dropdown
 Flight::route('GET /dashboard/views/catalogo/entradas', function()
 {
+    Flight::render(
+        'pages/partials/Table',
+        array(
+            'dataName' => 'entradas',
+            'headers' => array(
+                '#', 
+                'Nombre de lote',
+                'Cantidad',
+                'Caducidad',
+                'Fecha de compra',
+                'Fabricación',
+                'Costo por unidad',
+                )
+        ),
+        'table'
+    );
     Flight::render(
         'pages/partials/HeaderNav', 
         array(
@@ -245,6 +351,19 @@ Flight::route('GET /dashboard/views/catalogo/traspaso', function()
 });
 Flight::route('GET /dashboard/views/catalogo/salidas', function()
 {
+    Flight::render(
+        'pages/partials/Table',
+        array(
+            'dataName' => 'consumos',
+            'headers' => array(
+                'Folio', 
+                'Paciente',
+                'Fecha de consumo',
+                'Realizó la salida'
+                )
+        ),
+        'table'
+    );
     Flight::render(
         'pages/partials/HeaderNav', 
         array(
