@@ -7,3 +7,7 @@
     <?php echo $table_compra ?>
 
 </div>
+
+<?php echo $modal_form1 ?>
+
+<?php echo $modal_form1 ?>
