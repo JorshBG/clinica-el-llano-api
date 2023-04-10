@@ -33,7 +33,7 @@
             </div>
         </div>
         <ul class="nav flex-column pt-3 pt-md-0" id="dashboard_side-bar">
-            <li class="nav-item active center-grid">
+            <li class="nav-item active d-grid center-grid">
                 <img src="/views/assets/img/el-llano-logo.png" alt="ellano-logo" width="80px">
                 Clínica El Llano
             </li>
