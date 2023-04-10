@@ -1,6 +1,14 @@
-import api from "/config/api.js";
+import api from "/config/api.js"
+import RowTable from "/views/pages/components/RowTable.js"
+import { verifyDataTable, createDataTable } from "/views/pages/components/DataTablesModule.js"
+
 
 document.addEventListener('DOMContentLoaded', async () => {
+
+    let elementsOnTable = {}
+    let defaultAmountElements = 5
+    let amountElements = defaultAmountElements
+
     const btnLogout = document.querySelector('#dashboard_btnLogout');
 
     btnLogout.onclick = () => sign_out();
@@ -19,11 +27,24 @@ document.addEventListener('DOMContentLoaded', async () => {
         menu.addEventListener('click', async function (evt) {
             evt.preventDefault();
             bodyContent.innerHTML = await renderView(menu.pathname)
-            // console.log(menu.pathname);
+
+            const bodyTable = document.querySelector('#dashboard_table-body');
+            
+            if(menu.pathname !== '/dashboard/view/index'){
+                let data = await loadContentTable(menu.pathname)
+                elementsOnTable = data.result
+                let index = 1
+                verifyDataTable()
+                for (const product of elementsOnTable) {
+                    let rowProduct = RowTable(product, index)
+                    bodyTable.appendChild(rowProduct)
+                    index++
+                }
+                createDataTable()
+            }
+
         })
     }
-
-    // await renderView('/dashboard/view/dashboard')
 
 })
 
@@ -40,5 +61,17 @@ async function renderView(ref) {
     let res = await api(ref)
 
     return await res.text()
+
+}
+
+async function loadContentTable(ref){
+
+    let res = await api('/api' + ref, 'GET', null, {
+        'x-api-key': sessionStorage.getItem('token')
+    })
+
+    let dataJson = await res.json()
+
+    return dataJson
 
 }
