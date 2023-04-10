@@ -1,8 +1,19 @@
 .center-grid{
-    display: grid;
     justify-items: center;
+    align-items: center;
 }
 
 .w-full{
     width: 100%;
+}
+
+.h-full {
+    height: 100%;
+}
+
+.h-fluid{
+    padding-top: var(--bs-gutter-y, 5rem);
+    padding-bottom: var(--bs-gutter-y, 5rem);
+    margin-top: auto;
+    margin-bottom: auto;
 }
