@@ -12,7 +12,7 @@
                         <?php echo $modal_body ?>
 
                         <div class="d-grid">
-                            <button type="submit" class="btn btn-gray-800">
+                            <button type="submit" class="btn btn-gray-800 mb-3">
                                 Guardar
                             </button>
                             <button 
