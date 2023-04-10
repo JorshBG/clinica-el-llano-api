@@ -1,5 +1,5 @@
 <!-- DASHBOARD MENU -->
-<li class="nav-item">
+<!-- <li class="nav-item">
     <a class="nav-link d-flex align-items-center nav-only-item" href="/dashboard/view/index">
   <span class="sidebar-icon">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-speedometer"
@@ -12,7 +12,7 @@
   </span>
         <span class="mt-1 ms-1 sidebar-text">Dashboard</span>
     </a>
-</li>
+</li> -->
 <!--  Dropdown CATEGORIAS  -->
 <li class="nav-item">
             <span
@@ -67,11 +67,27 @@
                 >
             </li>
 
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a
                     class="nav-link nav-only-item"
                     href="/dashboard/views/catalogo/unidad-de-medida"
                 ><span class="sidebar-text">Unidad de medida</span></a
+                >
+            </li> -->
+
+            <li class="nav-item">
+                <a
+                    class="nav-link nav-only-item"
+                    href="/dashboard/views/catalogo/unidad-de-venta"
+                ><span class="sidebar-text">Unidades de venta</span></a
+                >
+            </li>
+
+            <li class="nav-item">
+                <a
+                    class="nav-link nav-only-item"
+                    href="/dashboard/views/catalogo/unidad-de-compra"
+                ><span class="sidebar-text">Unidades de compra</span></a
                 >
             </li>
 
