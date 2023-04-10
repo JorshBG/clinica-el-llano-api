@@ -27,25 +27,25 @@ function queryResponse($isGood): void
 function constraint($token, $id_usuario, $rol_required, $callback): void
 {
     try {
-
-        if ($token)
+        $flag = Role::validate($id_usuario, $rol_required);
+        if ($flag){
+            $callback();
+        } else
         {
-            $flag = Verify::token(array('idUsuario'=>$id_usuario,'token'=>$token));
-            if ($flag)
-            {
-                $flag = Role::validate($id_usuario, $rol_required);
-                if ($flag){
-                    $callback();
-                } else
-                {
-                    Flight::json(["message"=> "El rol de '" . strtolower($rol_required) . "' es requerido"], 403);
-                }
-            } else {
-                Flight::json(['message'=>'Sin autorización'], 401);
-            }
-        }else {
-            Flight::json(['message'=>'No se ha provisto un token'], 403);
+            Flight::json(["message"=> "El rol de '" . strtolower($rol_required) . "' es requerido"], 403);
         }
+        // if ($token)
+        // {
+        //     $flag = Verify::token(array('idUsuario'=>$id_usuario,'token'=>$token));
+        //     if ($flag)
+        //     {
+                
+        //     } else {
+        //         Flight::json(['message'=>'Sin autorización'], 401);
+        //     }
+        // }else {
+        //     Flight::json(['message'=>'No se ha provisto un token'], 403);
+        // }
     }catch (PDOException|Exception $e){
         Flight::json(['message' => 'Se ha producido un error en el servidor', 'error' => $e->getMessage()], 500);
     }

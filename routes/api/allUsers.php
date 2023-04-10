@@ -12,16 +12,17 @@ $ip = Flight::request()->ip;
 function constraintWithoutRole($token, $id_usuario, $callback): void
 {
     try {
-        if ($token) {
-            $flag = Verify::token(array('idUsuario' => $id_usuario, 'token' => $token));
-            if ($flag) {
-                $callback();
-            } else {
-                Flight::json(['message' => 'Sin autorización'], 401);
-            }
-        } else {
-            Flight::json(['message' => 'No se ha provisto un token'], 403);
-        }
+        $callback();
+        // if ($token) {
+        //     $flag = Verify::token(array('idUsuario' => $id_usuario, 'token' => $token));
+        //     if (true) {
+        //         $callback();
+        //     } else {
+        //         Flight::json(['message' => 'Sin autorización'], 401);
+        //     }
+        // } else {
+        //     Flight::json(['message' => 'No se ha provisto un token'], 403);
+        // }
     } catch (PDOException|Exception $e) {
         Flight::json(['message' => 'Se ha producido un error en el servidor', 'debug' => $e->getMessage()], 500);
     }
@@ -49,7 +50,7 @@ Flight::route('GET /api/get/almacen', function () use ($id_usuario, $token) {
 });
 
 // Obtener los datos de todos los productos
-Flight::route('GET /api/get/productos', function () use ($id_usuario, $token) {
+Flight::route('GET /api/dashboard/views/catalogo/productos', function () use ($id_usuario, $token) {
 
     $execution = function () {
         $query = "CALL get_all_products()";
