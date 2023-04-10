@@ -1,20 +1,3 @@
-<!--
-
-=========================================================
-* Volt Free - Bootstrap 5 Dashboard
-=========================================================
-
-* Product Page: https://themesberg.com/product/admin-dashboard/volt-bootstrap-5-dashboard
-* Copyright 2021 Themesberg (https://www.themesberg.com)
-* License (https://themesberg.com/licensing)
-
-* Designed and coded by https://themesberg.com
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. Please contact us to request a removal.
-
--->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -46,6 +29,10 @@
 
     <!-- Volt CSS -->
     <link type="text/css" href="/views/css/volt.css" rel="stylesheet">
+
+    <!-- Data tables -->
+    <link rel="stylesheet" href="/views/utils/DataTables/DataTables-1.13.4/css/dataTables.bootstrap5.min.css">
+    <!-- <link rel="stylesheet" href="/views/utils/DataTables/datatables.css"> -->
 
     <!-- NOTICE: You can use the _analytics.html partial to include production code specific code & trackers -->
     <link rel="stylesheet" href="/views/css/el-llano-styles.css">
@@ -109,6 +96,14 @@
 
 <!-- Volt JS -->
 <script src="/views/assets/js/volt.js"></script>
+
+<!-- Data tables -->
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> -->
+<script src="/views/utils/jQuery-3.6.0/jquery-3.6.0.js"></script>
+<!-- <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script> -->
+<!-- <script src="/views/utils/DataTables/DataTables-1.13.4/js/jquery.dataTables.js"></script> -->
+<script src="/views/utils/DataTables/datatables.js"></script>
+<script src="/views/utils/DataTables/DataTables-1.13.4/js/dataTables.bootstrap5.js"></script>
 
 <script src="/controllers/dashboard.controller.js" type="module"></script>
 
