@@ -13,8 +13,6 @@ Flight::route('GET /',function()
 Flight::route('GET /dashboard',function() use($isActive)
 {
     if ($isActive){
-        // Renderizar Menu bar views/pages/partials/MenuBar.php
-//        views/pages/partials/SideMenusAdmin.php
         Flight::render('pages/partials/MenuBar', null, 'menuBar');
         Flight::render('pages/partials/NavBar', null, 'navBar');
         switch ($_SESSION['userAlmacen']){
@@ -31,7 +29,8 @@ Flight::route('GET /dashboard',function() use($isActive)
                 break;
         }
         Flight::render('pages/partials/SideBar', null, 'sideBar');
-        Flight::render('pages/menus/general/dashboard', null, 'content');
+        Flight::render('pages/menus/index', null, 'content');
+        // Flight::render('pages/menus/general/dashboard', null, 'content');
         Flight::render('index');
     } else {
         Flight::unauthorized();
@@ -93,6 +92,7 @@ Flight::route('GET /dashboard/view/index', function()
 #region categorias dropdown
 Flight::route('GET /dashboard/views/catalogo/productos', function()
 {
+    $name_link = 'producto';
     Flight::render(
         'pages/partials/Table',
         array(
@@ -100,7 +100,7 @@ Flight::route('GET /dashboard/views/catalogo/productos', function()
             'headers' => array(
                 '#', 
                 'Nombre',
-                'Cantidad',
+                'Sustancia activa',
                 'Costo',
                 'Costo por unidad',
                 'Presentación',
@@ -108,23 +108,40 @@ Flight::route('GET /dashboard/views/catalogo/productos', function()
                 'Unidad de venta',
                 'Unidad de compra',
                 'Contenido',
-                'Descuento'
+                'Descuento',
+                'Opciones'
                 )
         ),
         'table'
+    );
+    Flight::render(
+        'pages/partials/forms/ProductsForm',
+        null,
+        'modal_body'
+    );
+    Flight::render(
+        'pages/partials/ModalForm',
+        array(
+            'id_modal' => $name_link,
+            'modal_title' => 'Registrar ' . $name_link
+        ),
+        'modal_form'
     );
     Flight::render(
         'pages/partials/HeaderNav', 
         array(
             'title' => 'Productos registrados',
             'parent' => 'Categorias',
-            'child' => 'Productos'
+            'child' => 'Productos',
+            'text_button' => $name_link
         ), 
-        'header_nav');
+        'header_nav'
+    ); 
     Flight::render('pages/menus/general/categories/products');
 });
 Flight::route('GET /dashboard/views/catalogo/proveedores', function()
 {
+    $name_link = 'proveedores';
     Flight::render(
         'pages/partials/Table',
         array(
@@ -134,68 +151,149 @@ Flight::route('GET /dashboard/views/catalogo/proveedores', function()
                 'Nombre',
                 'Correo',
                 'Teléfono',
-                'RFC'
+                'RFC',
+                'Opciones'
                 )
         ),
         'table'
+    );
+    Flight::render(
+        'pages/partials/forms/providersForm',
+        null,
+        'modal_body'
+    );
+    Flight::render(
+        'pages/partials/ModalForm',
+        array(
+            'id_modal' => $name_link,
+            'modal_title' => 'Registrar ' . $name_link
+        ),
+        'modal_form'
     );
     Flight::render(
         'pages/partials/HeaderNav', 
         array(
             'title' => 'Proveedores registrados',
             'parent' => 'Categorias',
-            'child' => 'Proveedores'
+            'child' => 'Proveedores',
+            'text_button' => $name_link
         ), 
-        'header_nav');
+        'header_nav'
+    );
     Flight::render('pages/menus/general/categories/providers');
 });
-Flight::route('GET /dashboard/views/catalogo/unidad-de-medida', function()
+
+Flight::route('GET /dashboard/views/catalogo/unidad-de-venta', function()
 {
+    $name_link = 'unidad de venta';
+    $name_id = 'unidad-de-venta';
     Flight::render(
         'pages/partials/Table',
         array(
-            'dataName' => 'unidad de venta',
+            'dataName' => 'Unidades de venta',
             'headers' => array(
                 '#', 
-                'Unidad'
+                'Unidad',
+                'Opciones'
                 )
         ),
-        'table_venta'
+        'table'
     );
+    Flight::render(
+        'pages/partials/forms/sellUniteForm',
+        null,
+        'modal_body'
+    );
+    Flight::render(
+        'pages/partials/ModalForm',
+        array(
+            'id_modal' => $name_id,
+            'modal_title' => 'Registrar ' . $name_link
+        ),
+        'modal_form'
+    );
+    Flight::render(
+        'pages/partials/HeaderNav', 
+        array(
+            'title' => 'Unidades de venta',
+            'parent' => 'Categorias',
+            'child' => 'Unidad de venta',
+            'text_button' => $name_link
+        ), 
+        'header_nav'
+    );
+    Flight::render('pages/menus/general/categories/sell-unite');
+});
+
+Flight::route('GET /dashboard/views/catalogo/unidad-de-compra', function()
+{
+    $name_link = 'Unidad de compra';
+    $name_id = 'Unidad-de-compra';
     Flight::render(
         'pages/partials/Table',
         array(
             'dataName' => 'unidad de compra',
             'headers' => array(
                 '#', 
-                'Unidad'
+                'Unidad',
+                'Opciones'
                 )
         ),
-        'table_compra'
+        'table'
     );
+    Flight::render(
+        'pages/partials/forms/buyUniteForm',
+        null,
+        'modal_body'
+    );
+    Flight::render(
+        'pages/partials/ModalForm',
+        array(
+            'id_modal' => $name_id,
+            'modal_title' => 'Registrar ' . $name_link
+        ),
+        'modal_form'
+    );
+    
     Flight::render(
         'pages/partials/HeaderNav', 
         array(
-            'title' => 'Unidades de medida',
+            'title' => 'Unidades de compra',
             'parent' => 'Categorias',
-            'child' => 'Unidades de medida',
-            'subtitle' => 'Unidades de medida sobre los productos registrados'
+            'child' => 'Unidades de compra',
+            'text_button' => $name_link
         ), 
         'header_nav');
-    Flight::render('pages/menus/general/categories/measure-unite');
+    Flight::render('pages/menus/general/categories/buy-unite');
 });
+
 Flight::route('GET /dashboard/views/catalogo/categorias', function()
 {
+    $name_link = 'categoria';
     Flight::render(
         'pages/partials/Table',
         array(
             'dataName' => 'categorias',
             'headers' => array(
                 '#', 
-                'Categoría'
+                'Categoría',
+                'Opciones'
                 )
         ),
         'table'
+    );
+    Flight::render(
+        'pages/partials/forms/categoriesForm',
+        null,
+        'modal_body'
+    );
+    Flight::render(
+        'pages/partials/ModalForm',
+        array(
+            'id_modal' => $name_link,
+            'modal_title' => 'Registrar ' . $name_link
+        ),
+        'modal_form'
     );
     Flight::render(
         'pages/partials/HeaderNav', 
@@ -203,13 +301,16 @@ Flight::route('GET /dashboard/views/catalogo/categorias', function()
             'title' => 'Categorias',
             'parent' => 'Categorias',
             'child' => 'Categorias',
-            'subtitle' => 'Categoria a la que pertenece un producto'
+            'subtitle' => 'Categoria a la que pertenece un producto',
+            'text_button' => $name_link
         ), 
-        'header_nav');
+        'header_nav'
+    );
     Flight::render('pages/menus/general/categories/categories');
 });
 Flight::route('GET /dashboard/views/catalogo/almacenes', function()
 {
+    $name_link = 'almacen';
     Flight::render(
         'pages/partials/Table',
         array(
@@ -217,25 +318,43 @@ Flight::route('GET /dashboard/views/catalogo/almacenes', function()
             'headers' => array(
                 '#', 
                 'Almacen',
-                'Descripción'
+                'Descripción',
+                'Opciones'
                 )
         ),
         'table'
+    );
+    Flight::render(
+        'pages/partials/forms/storeForm',
+        null,
+        'modal_body'
+    );
+    Flight::render(
+        'pages/partials/ModalForm',
+        array(
+            'id_modal' => $name_link,
+            'modal_title' => 'Registrar ' . $name_link
+        ),
+        'modal_form'
     );
     Flight::render(
         'pages/partials/HeaderNav', 
         array(
             'title' => 'Almacenes registrados',
             'parent' => 'Categorias',
-            'child' => 'Almacenes'
+            'child' => 'Almacenes',
+            'text_button' => $name_link
         ), 
-        'header_nav');
+        'header_nav'
+    );
     Flight::render('pages/menus/general/categories/stores');
 });
 #endregion
 #region compras dropdown
 Flight::route('GET /dashboard/views/catalogo/ordenes-de-compra', function()
 {
+    $name_link = 'orden de compra';
+    $name_id = 'orden-de-compra';
     Flight::render(
         'pages/partials/Table',
         array(
@@ -248,10 +367,24 @@ Flight::route('GET /dashboard/views/catalogo/ordenes-de-compra', function()
                 'Proveedor',
                 'Realizó la compra',
                 'Estatus de entrega',
-                'Estatus de pago'
+                'Estatus de pago',
+                'Opciones'
                 )
         ),
         'table'
+    );
+    Flight::render(
+        'pages/partials/forms/boughtOrdersForm',
+        null,
+        'modal_body'
+    );
+    Flight::render(
+        'pages/partials/ModalForm',
+        array(
+            'id_modal' => $name_id,
+            'modal_title' => 'Registrar ' . $name_link
+        ),
+        'modal_form'
     );
     Flight::render(
         'pages/partials/HeaderNav', 
@@ -259,13 +392,15 @@ Flight::route('GET /dashboard/views/catalogo/ordenes-de-compra', function()
             'title' => 'Ordenes de compra',
             'parent' => 'Compras',
             'child' => 'ordenes de pago',
-            'subtitle' => 'Ordenes de compra realizadas a los proveedores registrados'
+            'subtitle' => 'Ordenes de compra realizadas a los proveedores registrados',
+            'text_button' => $name_link
         ), 
         'header_nav');
     Flight::render('pages/menus/general/boughts/bought-orders');
 });
 Flight::route('GET /dashboard/views/catalogo/pagos', function()
 {
+    $name_link = 'pago';
     Flight::render(
         'pages/partials/Table',
         array(
@@ -275,25 +410,42 @@ Flight::route('GET /dashboard/views/catalogo/pagos', function()
                 'Cantidad',
                 'Método de pago',
                 'Orden de compra',
-                'Cantidad'
+                'Cantidad',
+                'Opciones'
                 )
         ),
         'table'
+    );
+    Flight::render(
+        'pages/partials/forms/paysForm',
+        null,
+        'modal_body'
+    );
+    Flight::render(
+        'pages/partials/ModalForm',
+        array(
+            'id_modal' => $name_link,
+            'modal_title' => 'Registrar ' . $name_link
+        ),
+        'modal_form'
     );
     Flight::render(
         'pages/partials/HeaderNav', 
         array(
             'title' => 'Pagos realizados',
             'parent' => 'Compras',
-            'child' => 'pagos'
+            'child' => 'pagos',
+            'text_button' => $name_link
         ), 
-        'header_nav');
+        'header_nav'
+    );
     Flight::render('pages/menus/general/boughts/pays');
 });
 #endregion
 #region adminstracion dropdown
 Flight::route('GET /dashboard/views/catalogo/entradas', function()
 {
+    $name_link = 'entrada';
     Flight::render(
         'pages/partials/Table',
         array(
@@ -306,22 +458,38 @@ Flight::route('GET /dashboard/views/catalogo/entradas', function()
                 'Fecha de compra',
                 'Fabricación',
                 'Costo por unidad',
+                'Opciones'
                 )
         ),
         'table'
+    );
+    Flight::render(
+        'pages/partials/forms/entriesForm',
+        null,
+        'modal_body'
+    );
+    Flight::render(
+        'pages/partials/ModalForm',
+        array(
+            'id_modal' => $name_link,
+            'modal_title' => 'Registrar ' . $name_link
+        ),
+        'modal_form'
     );
     Flight::render(
         'pages/partials/HeaderNav', 
         array(
             'title' => 'Entradas de producto',
             'parent' => 'Administración',
-            'child' => 'Entradas'
+            'child' => 'Entradas',
+            'text_button' => $name_link
         ), 
         'header_nav');
     Flight::render('pages/menus/general/administration/entries');
 });
 Flight::route('GET /dashboard/views/catalogo/traspaso', function()
 {
+    $name_link = 'traspaso';
     Flight::render(
         'pages/partials/Table',
         array(
@@ -340,17 +508,33 @@ Flight::route('GET /dashboard/views/catalogo/traspaso', function()
         'table'
     );
     Flight::render(
+        'pages/partials/forms/transportsForm',
+        null,
+        'modal_body'
+    );
+    Flight::render(
+        'pages/partials/ModalForm',
+        array(
+            'id_modal' => $name_link,
+            'modal_title' => 'Registrar ' . $name_link
+        ),
+        'modal_form'
+    );
+    Flight::render(
         'pages/partials/HeaderNav', 
         array(
             'title' => 'Traslados entre almacenes',
             'parent' => 'Administración',
-            'child' => 'traslados'
+            'child' => 'traslados',
+            'text_button' => $name_link
         ), 
-        'header_nav');
+        'header_nav'
+    );
     Flight::render('pages/menus/general/administration/transports');
 });
 Flight::route('GET /dashboard/views/catalogo/salidas', function()
 {
+    $name_link = 'salida';
     Flight::render(
         'pages/partials/Table',
         array(
@@ -359,19 +543,35 @@ Flight::route('GET /dashboard/views/catalogo/salidas', function()
                 'Folio', 
                 'Paciente',
                 'Fecha de consumo',
-                'Realizó la salida'
+                'Realizó la salida',
+                'Opciones'
                 )
         ),
         'table'
+    );
+    Flight::render(
+        'pages/partials/forms/outputsForm',
+        null,
+        'modal_body'
+    );
+    Flight::render(
+        'pages/partials/ModalForm',
+        array(
+            'id_modal' => $name_link,
+            'modal_title' => 'Registrar ' . $name_link
+        ),
+        'modal_form'
     );
     Flight::render(
         'pages/partials/HeaderNav', 
         array(
             'title' => 'Consumos del hospital',
             'parent' => 'Administración',
-            'child' => 'Consumos'
+            'child' => 'Consumos',
+            'text_button' => $name_link
         ), 
-        'header_nav');
+        'header_nav'
+    );
     Flight::render('pages/menus/general/administration/outputs');
 });
 #endregion
