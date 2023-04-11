@@ -410,7 +410,7 @@ Flight::route('GET /dashboard/views/catalogo/pagos', function()
                 'Cantidad',
                 'Método de pago',
                 'Orden de compra',
-                'Cantidad',
+                'Fecha de pago',
                 'Opciones'
                 )
         ),
